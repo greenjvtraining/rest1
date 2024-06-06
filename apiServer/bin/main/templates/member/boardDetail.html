@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Board Detail</h1>
+<hr>
+<ul>
+	<li>[[${board.bno}]]</li>
+	<li>[[${board.title}]]</li>
+	<li>[[${board.content}]]</li>
+	<li>[[${board.member.username}]]</li>
+	<li>[[${board.newName}]]</li>
+	<li><img th:src="@{/images/{img}(img=${board.newName})}"></li>
+</ul>
+</body>
+</html>

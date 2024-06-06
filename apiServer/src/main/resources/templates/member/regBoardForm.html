@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>RegBoard Form</h1>
+<hr>
+<div>
+	<!--  <form name="frm" action="/member/regBoardProc" method="post" enctype="multipart/form-data">-->
+	<form name="frm">
+		<input type="text" name="title" placeholder="Input title...."><br>
+		<input type="text" name="content" placeholder="Input content...."><br>
+		<input type="text" name="writer" value="${username}"><br>
+		<input type="file" name="file">
+		<input type="submit" value="등록" onclick="submitForm(event)">
+	</form>
+	
+</div>
+<div id="demo"></div>
+
+<div id="demo1" th:data-url="@{/member/regBoardProc1}"></div>
+<script th:inline="javascript">
+		function submitForm(event) {
+			var regBoardProcUrl = document.getElementById('demo1').getAttribute('data-url');
+			
+			event.preventDefault();
+			alert("submit....");
+			
+			var form = document.forms['frm'];
+			var formData = new FormData(form);
+			$.ajax({
+				type : "post",
+				enctype : 'multipart/form-data',
+				url : regBoardProcUrl,
+				//url : /*[[@{/board/regist1}]]*/{},
+				data : formData,
+				dataType : 'text',
+				processData : false,
+				contentType : false,
+				cache : false,
+				success : function(data) {
+					console.log("success : ", data);
+					document.getElementById("demo").innerHTML = data;
+				},
+				error : function(e) {
+					console.log("error : ", e);
+				}
+			});
+		}
+</script>
+</body>
+</html>
