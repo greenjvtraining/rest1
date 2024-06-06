@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Login Form</h1>
+<hr>
+<form name="frm">
+	<input type="text" name="username" placeholder="Input username..."><br>
+	<input type="text" name="password" placeholder="Input password..."><br>
+	<input type="submit" value="로그인" onclick="submitForm(event)">
+</form>
+
+<div id="demo"></div>
+<script>
+function submitForm(event) {
+	event.preventDefault();
+	alert("submit....");
+	var form = document.forms['frm'];
+	var formData = $(form).serialize();
+	$.ajax({
+		type : "POST",
+		url : "http://localhost:9001/loginProc",
+		contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // 기본 contentType 설정
+		data : formData,
+		dataType : 'json',
+		success : function(data) {
+			console.log("success : ", data);
+			document.getElementById("demo").innerHTML = data;
+		},
+		error : function(e) {
+			console.log("error : ", e);
+		}
+	});
+}
+</script>
+</body>
+</html>

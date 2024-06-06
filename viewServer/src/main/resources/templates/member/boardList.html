@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Board List</h1>
+<hr>
+<button onclick="getBoardList()">목록 보기</button>
+<div id="demo"></div>
+<script>
+function getBoardList() {
+	alert("getBoardList....");
+	
+	$.ajax({
+		type : "GET",
+		url : "http://localhost:9001/member/getBoards",
+		//contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // 기본 contentType 설정
+		//data : formData,
+		dataType : 'json',
+		success : function(data) {
+			console.log("success : ", data);
+			//document.getElementById("demo").innerHTML = data;
+		},
+		error : function(e) {
+			console.log("에러났어요.");
+		}
+	});
+}
+
+</script>
+</body>
+</html>

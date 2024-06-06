@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Join Page</h1>
+<hr>
+<form name="frm">
+	<input type="text" name="username" placeholder="Input username"><br>
+	<input type="text" name="password" placeholder="Input password"><br>
+	<input type="text" name="name" placeholder="Input name...."><br>
+	<input type="text" name="role" value="ROLE_MEMBER"><br>
+	<input type="button" value="회원등록" onclick="submitForm(event)">
+</form>
+<div id="demo"></div>
+<script>
+function submitForm(event) {
+	event.preventDefault();
+	alert("submit....");
+	var form = document.forms['frm'];
+	var formData = $(form).serialize();
+	$.ajax({
+		type : "POST",
+		contentType : 'application/x-www-form-urlencoded',
+		url : "http://localhost:9001/joinProc",
+		data : formData,
+		dataType : 'json',
+		success : function(data) {
+			console.log("success : ", data);
+			document.getElementById("demo").innerHTML = data;
+		},
+		error : function(e) {
+			console.log("error : ", e);
+		}
+	});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Board</h1>
+<hr>
+<input type="text" name="bno" placeholder="Input bno.....">
+<button onclick="getBoard()">게시물 보기</button>
+<div id="demo"></div>
+<script>
+function getBoard() {
+	alert("getBoard....");
+	const bno = document.querySelector("input[name='bno']");
+	$.ajax({
+		type : "GET",
+		url : "http://localhost:9001/member/getBoard?bno=" + bno.value,
+		dataType : 'json',
+		success : function(data) {
+			console.log("success : ", data);
+			let board = data; // 이미 JSON 형식으로 파싱되었으므로 파싱할 필요가 없음
+	        let imgSrc = "/images/" + board.newName; // 이미지 경로 설정
+	        document.getElementById("demo").innerHTML = "<img src='" + imgSrc + "'>";
+		},
+		error : function(e) {
+			console.log("에러났어요.");
+		}
+	});
+}
+
+</script>
+</body>
+</html>
